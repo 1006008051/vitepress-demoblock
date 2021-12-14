@@ -18,6 +18,16 @@
   --c-brand: #3eaf7c;
   --c-brand-light: #4abf8a;
 
+--c-border: #ebedf1;
+  /* 
+background colors */
+  --c-bg: #ffffff;
+  --c-bg-light: #f3f4f5;
+  --c-bg-lighter: #eeeeee;
+  --c-bg-navbar: var(--c-bg);
+  --c-bg-sidebar: var(--c-bg);
+  --c-bg-arrow: #cccccc;
+
   /**
    * Typography
    * --------------------------------------------------------------------- */
@@ -53,6 +63,7 @@
    * --------------------------------------------------------------------- */
 
   --header-height: 3.6rem;
+  --slug-width: 10rem;
 }
 
 /** Fallback Styles */
@@ -70,5 +81,6 @@
   --code-font-family: var(--font-family-mono);
   --code-font-size: 14px;
   --code-inline-bg-color: rgba(27, 31, 35, 0.05);
-  --code-bg-color: #282c34;
+  /* --code-bg-color: #282c34; */
+  --code-bg-color: #f9fafb;
 }

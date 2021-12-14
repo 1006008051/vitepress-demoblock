@@ -65,6 +65,8 @@ export function createMarkdownToVueRenderFn(
     })
 
     const { content, data: frontmatter } = matter(src)
+    md.realPath = frontmatter?.map?.realPath
+    md.urlPath = file
     let { html, data } = md.render(content)
 
     if (isBuild) {
@@ -119,13 +121,14 @@ export function createMarkdownToVueRenderFn(
       // TODO use git timestamp?
       lastUpdated: Math.round(fs.statSync(file).mtimeMs)
     }
-
+    if (Object.prototype.toString.call(data.hoistedTags) == '[object Object]') {
+      data.hoistedTags = [data.hoistedTags]
+    }
     const vueSrc =
       genPageDataCode(data.hoistedTags || [], pageData).join('\n') +
       `\n<template><div>${html}</div></template>`
 
     debug(`[render] ${file} in ${Date.now() - start}ms.`)
-
     const result = {
       vueSrc,
       pageData,
@@ -143,10 +146,26 @@ const scriptClientRe = /<\s*script[^>]*\bclient\b[^>]*/
 const defaultExportRE = /((?:^|\n|;)\s*)export(\s*)default/
 const namedDefaultExportRE = /((?:^|\n|;)\s*)export(.+)as(\s*)default/
 
-function genPageDataCode(tags: string[], data: PageData) {
+function genPageDataCode(tags: any[], data: PageData) {
   const code = `\nexport const __pageData = ${JSON.stringify(
     JSON.stringify(data)
   )}`
+
+  const isObject =
+    tags.length == 1 &&
+    Object.prototype.toString.call(tags[0]) == '[object Object]'
+  if (isObject) {
+    const tagsObj = tags.pop()
+    tags.unshift(
+      `<script>${code}\n${(tagsObj.script || []).join(';')}\n
+      export default {
+      components: {
+        ${(tagsObj.components || []).join(', ')}
+      }
+    }</script>`
+    )
+    return tags
+  }
 
   const existingScriptIndex = tags.findIndex((tag) => {
     return (

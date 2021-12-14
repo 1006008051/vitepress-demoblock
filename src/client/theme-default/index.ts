@@ -1,4 +1,5 @@
 import './styles/vars.css'
+import './styles/vars-dark.css'
 import './styles/layout.css'
 import './styles/code.css'
 import './styles/custom-blocks.css'

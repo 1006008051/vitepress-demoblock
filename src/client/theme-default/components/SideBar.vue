@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import NavLinks from './NavLinks.vue'
-import SideBarLinks from './SideBarLinks.vue'
-
-defineProps<{ open: boolean }>()
+import NavLinks from "./NavLinks.vue";
+import SideBarLinks from "./SideBarLinks.vue";
+import Slugs from './Slugs.vue'
+defineProps<{ open: boolean }>();
 </script>
 
 <template>
@@ -15,6 +15,7 @@ defineProps<{ open: boolean }>()
 
     <slot name="sidebar-bottom" />
   </aside>
+  <Slugs />
 </template>
 
 <style scoped>

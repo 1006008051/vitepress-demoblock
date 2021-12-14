@@ -170,16 +170,16 @@ table {
 }
 
 tr {
-  border-top: 1px solid #dfe2e5;
+  border-top: 1px solid var(--c-divider);
 }
 
 tr:nth-child(2n) {
-  background-color: #f6f8fa;
+  background-color: var(--c-bg);
 }
 
 th,
 td {
-  border: 1px solid #dfe2e5;
+  border: 1px solid var(--c-divider);
   padding: 0.6em 1em;
 }
 
@@ -197,6 +197,18 @@ blockquote > p {
 
 form {
   margin: 0;
+}
+
+.right-slug {
+  position: fixed;
+  top: var(--header-height);
+  right: 0;
+  max-height: calc(100% - var(--header-height) - 10rem);
+  width: var(--slug-width);
+  padding: 50px 24px 0 0;
+  background-color: var(--c-bg);
+  z-index: 3;
+  overflow-y: auto;
 }
 
 .theme.sidebar-open .sidebar-mask {

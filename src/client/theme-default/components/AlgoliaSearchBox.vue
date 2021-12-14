@@ -186,10 +186,18 @@ function initialize(userOptions: any) {
 
 .DocSearch {
   --docsearch-primary-color: var(--c-brand);
-  --docsearch-highlight-color: var(--docsearch-primary-color);
-  --docsearch-searchbox-shadow: inset 0 0 0 2px var(--docsearch-primary-color);
-  --docsearch-text-color: var(--c-text-light);
-  --docsearch-muted-color: var(--c-text-lighter);
-  --docsearch-searchbox-background: #f2f2f2;
+  --docsearch-text-color: var(--c-text);
+  --docsearch-highlight-color: var(--c-brand);
+  --docsearch-muted-color: var(--c-text-quote);
+  --docsearch-container-background: rgba(9, 10, 17, 0.8);
+  --docsearch-modal-background: var(--c-bg-light);
+  --docsearch-searchbox-background: var(--c-bg-lighter);
+  --docsearch-searchbox-focus-background: var(--c-bg);
+  --docsearch-searchbox-shadow: inset 0 0 0 2px var(--c-brand);
+  --docsearch-hit-color: var(--c-text-light);
+  --docsearch-hit-active-color: var(--c-bg);
+  --docsearch-hit-background: var(--c-bg);
+  --docsearch-hit-shadow: 0 1px 3px 0 var(--c-border-dark);
+  --docsearch-footer-background: var(--c-bg);
 }
 </style>

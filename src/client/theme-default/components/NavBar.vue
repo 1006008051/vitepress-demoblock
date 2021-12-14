@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import NavBarTitle from './NavBarTitle.vue'
-import NavLinks from './NavLinks.vue'
-import ToggleSideBarButton from './ToggleSideBarButton.vue'
-
-defineEmits(['toggle'])
+import NavBarTitle from "./NavBarTitle.vue";
+import NavLinks from "./NavLinks.vue";
+import ToggleSideBarButton from "./ToggleSideBarButton.vue";
+import ToggleDarkModeButton from "./ToggleDarkModeButton.vue";
+defineEmits(["toggle"]);
 </script>
 
 <template>
@@ -17,8 +17,8 @@ defineEmits(['toggle'])
     <div class="nav">
       <NavLinks />
     </div>
-
     <slot name="search" />
+    <ToggleDarkModeButton />
   </header>
 </template>
 

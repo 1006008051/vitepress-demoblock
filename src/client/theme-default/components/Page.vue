@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PageFooter from './PageFooter.vue'
-import NextAndPrevLinks from './NextAndPrevLinks.vue'
+import PageFooter from "./PageFooter.vue";
+import NextAndPrevLinks from "./NextAndPrevLinks.vue";
 </script>
 
 <template>
@@ -36,8 +36,10 @@ import NextAndPrevLinks from './NextAndPrevLinks.vue'
 
 .container {
   margin: 0 auto;
-  padding: 0 1.5rem 4rem;
-  max-width: 48rem;
+  margin-right: var(--slug-width);
+  padding: 0.025rem 2.5rem 2rem;
+  /* max-width: 50rem; */
+  width: calc(100% - var(--slug-width));
 }
 
 .content {

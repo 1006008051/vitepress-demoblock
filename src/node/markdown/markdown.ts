@@ -11,6 +11,7 @@ import { hoistPlugin } from './plugins/hoist'
 import { preWrapperPlugin } from './plugins/preWrapper'
 import { linkPlugin } from './plugins/link'
 import { extractHeaderPlugin } from './plugins/header'
+import { demoPlugin } from './plugins/demo'
 import { Header } from '../shared'
 import anchor from 'markdown-it-anchor'
 import attrs from 'markdown-it-attrs'
@@ -42,6 +43,8 @@ export interface MarkdownParsedData {
 export interface MarkdownRenderer {
   __data: MarkdownParsedData
   render: (src: string, env?: any) => { html: string; data: any }
+  realPath?: string
+  urlPath?: string
 }
 
 export type { Header }
@@ -58,7 +61,8 @@ export const createMarkdownRenderer = (
   })
 
   // custom plugins
-  md.use(componentPlugin)
+  md.use(demoPlugin)
+    .use(componentPlugin)
     .use(highlightLinePlugin)
     .use(preWrapperPlugin)
     .use(snippetPlugin, srcDir)

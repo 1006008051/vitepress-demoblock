@@ -81,6 +81,13 @@ background colors */
   --code-font-family: var(--font-family-mono);
   --code-font-size: 14px;
   --code-inline-bg-color: rgba(27, 31, 35, 0.05);
-  /* --code-bg-color: #282c34; */
   --code-bg-color: #f9fafb;
+}
+
+body ::-webkit-scrollbar-track {
+  background-color: var(--c-border-dark);
+}
+
+body ::-webkit-scrollbar-thumb {
+  background-color: var(--c-border-dark);
 }

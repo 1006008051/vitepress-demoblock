@@ -1,7 +1,8 @@
 .demo {
-  background-color: #fff;
-  border: 1px solid var(--c-border);
+  background-color: var(--c-bg);
+  border: 1px solid var(--c-divider);
   border-radius: 1px;
+  margin-top: 1rem;
 }
 
 .demo-slot {
@@ -14,7 +15,7 @@
   padding: 0 8px;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px dashed var(--c-border);
+  border-top: 1px dashed var(--c-divider);
 }
 
 .demo-buttons {
@@ -31,12 +32,13 @@
 
 .demo-actions-tip {
   font-size: 12px;
-  color: #3eaf7c;
+  color: var(--c-brand);
 }
 
 .extra-class {
-  border-top: 1px dashed var(--c-border);
+  border-top: 1px dashed var(--c-divider);
   box-sizing: border-box;
+  margin: 0 !important;
 }
 
 .demo-platforms {
@@ -45,9 +47,9 @@
 }
 
 .demo-title-desc {
-  border-top: 1px dashed var(--c-border);
+  border-top: 1px dashed var(--c-divider);
   padding: 1.5em 1em;
-  color: #454d64;
+  color: var(--c-text);
   position: relative;
   font-size: 14px;
 }
@@ -57,6 +59,6 @@
   top: 0;
   left: 1em;
   transform: translateY(-50%);
-  background: #fff;
+  background: var(--c-bg);
   font-weight: 500;
 }

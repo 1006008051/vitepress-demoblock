@@ -1,10 +1,10 @@
 <template>
   <div>
     <p>
-      <span class="text">点击次数:</span>
+      <span class="text">点击次数1:</span>
       <span>{{ count }}</span>
     </p>
-    <button @click="onClick">count++</button>
+    <button @click="onClick">count++++++</button>
   </div>
 </template>
 

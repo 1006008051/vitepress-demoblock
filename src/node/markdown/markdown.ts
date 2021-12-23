@@ -11,7 +11,6 @@ import { hoistPlugin } from './plugins/hoist'
 import { preWrapperPlugin } from './plugins/preWrapper'
 import { linkPlugin } from './plugins/link'
 import { extractHeaderPlugin } from './plugins/header'
-import { demoPlugin } from './plugins/demo'
 import { Header } from '../shared'
 import anchor from 'markdown-it-anchor'
 import attrs from 'markdown-it-attrs'
@@ -61,8 +60,7 @@ export const createMarkdownRenderer = (
   })
 
   // custom plugins
-  md.use(demoPlugin)
-    .use(componentPlugin)
+  md.use(componentPlugin)
     .use(highlightLinePlugin)
     .use(preWrapperPlugin)
     .use(snippetPlugin, srcDir)

@@ -9,6 +9,8 @@ import { slash } from './utils/slash'
 import chalk from 'chalk'
 import _debug from 'debug'
 
+import { demoPlugin } from './demo'
+
 const debug = _debug('vitepress:md')
 const cache = new LRUCache<string, MarkdownCompileResult>({ max: 1024 })
 const includesRE = /<!--\s*@include:\s*(.*?)\s*-->/g
@@ -69,6 +71,8 @@ export function createMarkdownToVueRenderFn(
     md.urlPath = file
     let { html, data } = md.render(content)
 
+    const demoData = demoPlugin(html, md)
+    html = demoData.html
     if (isBuild) {
       // avoid env variables being replaced by vite
       html = html
@@ -121,14 +125,14 @@ export function createMarkdownToVueRenderFn(
       // TODO use git timestamp?
       lastUpdated: Math.round(fs.statSync(file).mtimeMs)
     }
-    if (Object.prototype.toString.call(data.hoistedTags) == '[object Object]') {
-      data.hoistedTags = [data.hoistedTags]
-    }
+
+    data.hoistedTags = [demoData.tagsObj]
     const vueSrc =
       genPageDataCode(data.hoistedTags || [], pageData).join('\n') +
       `\n<template><div>${html}</div></template>`
 
     debug(`[render] ${file} in ${Date.now() - start}ms.`)
+
     const result = {
       vueSrc,
       pageData,
@@ -151,11 +155,8 @@ function genPageDataCode(tags: any[], data: PageData) {
     JSON.stringify(data)
   )}`
 
-  const isObject =
-    tags.length == 1 &&
-    Object.prototype.toString.call(tags[0]) == '[object Object]'
-  if (isObject) {
-    const tagsObj = tags.pop()
+  const tagsObj = tags.pop()
+  if (tagsObj.components?.length) {
     tags.unshift(
       `<script>${code}\n${(tagsObj.script || []).join(';')}\n
       export default {

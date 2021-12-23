@@ -12,18 +12,14 @@
 
       <div class="demo-actions">
         <div class="demo-platforms">
-          <OnlineEdit :content="decodedCodeStr" :importMap="importMap" />
+          <OnlineEdit :content="decodedCodeStr" :importMap="importMap" v-show="src"/>
         </div>
         <div class="demo-buttons">
           <div class="demo-actions-copy">
             <span v-show="showTip" class="demo-actions-tip">复制成功!</span>
             <copySvg v-show="!showTip" @click="copyCode" title="复制" />
           </div>
-          <codeSvg
-            class="demo-actions-expand"
-            @click="toggleExpand()"
-            title="展开"
-          />
+          <codeSvg class="demo-actions-expand" @click="toggleExpand()" title="展开" />
         </div>
       </div>
       <div
@@ -36,48 +32,45 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue'
-import './demo.css'
-import copySvg from './icons/copy.vue'
-import codeSvg from './icons/code.vue'
-import OnlineEdit from './OnlineEdit'
-import { useCopyCode } from './useCopyCode'
-import { useParseCode } from './useParseCode'
+import { computed } from "vue";
+import "./demo.css";
+import copySvg from "./icons/copy.vue";
+import codeSvg from "./icons/code.vue";
+import OnlineEdit from "./OnlineEdit";
+import { useCopyCode } from "./useCopyCode";
+import { useParseCode } from "./useParseCode";
 
 export default {
   props: {
+    src: String,
     componentName: String,
     htmlStr: String,
     codeStr: String,
-    language: { default: 'vue', type: String },
+    language: { default: "vue", type: String },
     platforms: {
-      default: () => ['codepen'],
-      type: Array
+      default: () => ["codepen"],
+      type: Array,
     },
-    jsLibsStr: { type: String, default: '[]' },
-    cssLibsStr: { type: String, default: '[]' },
-    title: { type: String, default: '' },
-    desc: { type: String, default: '' }
+    jsLibsStr: { type: String, default: "[]" },
+    cssLibsStr: { type: String, default: "[]" },
+    title: { type: String, default: "" },
+    desc: { type: String, default: "" },
   },
   components: {
     copySvg,
     codeSvg,
-    OnlineEdit
+    OnlineEdit,
   },
   setup(props) {
-    const decodedHtmlStr = computed(() =>
-      decodeURIComponent(props.htmlStr ?? '')
-    )
-    const decodedCodeStr = computed(() =>
-      decodeURIComponent(props.codeStr ?? '')
-    )
+    const decodedHtmlStr = computed(() => decodeURIComponent(props.htmlStr ?? ""));
+    const decodedCodeStr = computed(() => decodeURIComponent(props.codeStr ?? ""));
 
-    const { showTip, copyCode } = useCopyCode(decodedCodeStr.value)
+    const { showTip, copyCode } = useCopyCode(decodedCodeStr.value);
     const { expand, toggleExpand, parsedCode } = useParseCode(
       decodedCodeStr.value,
       props.jsLibsStr,
       props.cssLibsStr
-    )
+    );
 
     return {
       expand,
@@ -86,8 +79,8 @@ export default {
       parsedCode,
       showTip,
       copyCode,
-      decodedCodeStr
-    }
-  }
-}
+      decodedCodeStr,
+    };
+  },
+};
 </script>

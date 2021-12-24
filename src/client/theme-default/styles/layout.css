@@ -89,7 +89,7 @@ h2 {
   /* overflow-x: auto; */
 }
 
-h2 + h3 {
+h2+h3 {
   margin-top: 1.5rem;
 }
 
@@ -157,8 +157,8 @@ ol {
   padding-left: 1.25em;
 }
 
-li > ul,
-li > ol {
+li>ul,
+li>ol {
   margin: 0;
 }
 
@@ -170,16 +170,16 @@ table {
 }
 
 tr {
-  border-top: 1px solid var(--c-divider);
+  border-top: 1px solid var(--c-border-dark);
 }
 
 tr:nth-child(2n) {
-  background-color: var(--c-bg);
+  background-color: var(--c-bg-light);
 }
 
 th,
 td {
-  border: 1px solid var(--c-divider);
+  border: 1px solid var(--c-border-dark);
   padding: 0.6em 1em;
 }
 
@@ -191,7 +191,7 @@ blockquote {
   color: #999;
 }
 
-blockquote > p {
+blockquote>p {
   margin: 0;
 }
 
@@ -215,12 +215,12 @@ form {
   display: block;
 }
 
-.theme.no-navbar > h1,
-.theme.no-navbar > h2,
-.theme.no-navbar > h3,
-.theme.no-navbar > h4,
-.theme.no-navbar > h5,
-.theme.no-navbar > h6 {
+.theme.no-navbar>h1,
+.theme.no-navbar>h2,
+.theme.no-navbar>h3,
+.theme.no-navbar>h4,
+.theme.no-navbar>h5,
+.theme.no-navbar>h6 {
   margin-top: 1.5rem;
   padding-top: 0;
 }

@@ -15,10 +15,11 @@
   --c-text-light-2: #476582;
   --c-text-light-3: #90a4b7;
 
-  --c-brand: #3eaf7c;
-  --c-brand-light: #4abf8a;
+  --c-brand: #0091ff;
+  --c-brand-light: #1a9cff;
 
---c-border: #ebedf1;
+  --c-border: #eaecef;
+  --c-border-dark: #dfe2e5;
   /* 
 background colors */
   --c-bg: #ffffff;

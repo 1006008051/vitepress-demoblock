@@ -7,6 +7,11 @@
 
 .demo-slot {
   padding: 40px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  align-items: center;
+
 }
 
 .demo-actions {

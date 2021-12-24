@@ -12,7 +12,6 @@ export const demoPlugin = (html: string, md: any) => {
   const allDemo = html.match(reg_g)
 
   allDemo?.forEach((demo: any, index: number) => {
-    console.log(demo)
     const src = (demo.match(/<demo[^>]+src=("|')(\S+)('|")/) || [])[2]
     const language =
       (demo.match(/<demo[^>]+language=("|')(\S+)('|")/) || [])[2] ?? 'vue'

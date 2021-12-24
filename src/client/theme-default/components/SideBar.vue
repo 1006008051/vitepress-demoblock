@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import NavLinks from "./NavLinks.vue";
 import SideBarLinks from "./SideBarLinks.vue";
-import Slugs from './Slugs.vue'
+import Slugs from "./Slugs.vue";
 defineProps<{ open: boolean }>();
 </script>
 
@@ -31,6 +31,17 @@ defineProps<{ open: boolean }>();
   overflow-y: auto;
   transform: translateX(-100%);
   transition: transform 0.25s ease;
+  color-scheme: dark;
+}
+/* 修改滚动条样式 */
+.sidebar::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--c-bg);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--c-divider);
 }
 
 @media (min-width: 720px) {

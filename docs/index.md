@@ -6,7 +6,7 @@
 
 ### 插槽1
 <demo>
-  <m-button>4545</m-button>
+  <m-button src="sb">4545</m-button>
 </demo>
 
 ### 按钮

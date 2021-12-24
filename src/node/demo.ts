@@ -12,8 +12,10 @@ export const demoPlugin = (html: string, md: any) => {
   const allDemo = html.match(reg_g)
 
   allDemo?.forEach((demo: any, index: number) => {
-    const src = (demo.match(/src=("|')(\S+)('|")/) || [])[2]
-    const language = (demo.match(/language=("|')(.*)('|")/) || [])[2] ?? 'vue'
+    console.log(demo)
+    const src = (demo.match(/<demo[^>]+src=("|')(\S+)('|")/) || [])[2]
+    const language =
+      (demo.match(/<demo[^>]+language=("|')(\S+)('|")/) || [])[2] ?? 'vue'
     let codeStr = demo.match(reg)[1]
     let demoMiddle = '' //demo中间字符串
     // 如果src不存在取slot内容为codeStr

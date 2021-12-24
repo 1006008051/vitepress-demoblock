@@ -32,7 +32,7 @@ const { site, theme, localePath } = useData()
 
 .logo {
   margin-right: 0.75rem;
-  height: 1.3rem;
+  height: 1.8rem;
   vertical-align: bottom;
 }
 </style>

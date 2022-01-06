@@ -156,6 +156,7 @@ function genPageDataCode(tags: any[], data: PageData) {
   )}`
 
   const tagsObj = tags.pop()
+
   if (tagsObj.components?.length) {
     tags.unshift(
       `<script>${code}\n${(tagsObj.script || []).join(';')}\n

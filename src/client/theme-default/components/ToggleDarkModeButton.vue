@@ -30,10 +30,14 @@
 import { computed, ref } from "vue";
 export default {
   setup() {
-    const toggleTheme = new Event("toggleTheme");
     let theme = ref<string>(
       window?.localStorage.getItem("vitepress-color-scheme") || "default"
     );
+    const toggleTheme = new CustomEvent("toggleTheme", {
+      detail: {
+        theme: theme.value
+      },
+    });
     const isDarkMode = computed(() => {
       return theme.value === "dark";
     });
@@ -41,11 +45,11 @@ export default {
       const htmlEl = window?.document.querySelector("html");
       htmlEl?.classList.toggle("dark", isDarkMode.value);
       window?.localStorage.setItem("vitepress-color-scheme", theme.value);
-      window?.dispatchEvent(toggleTheme);
     };
     changeTheme();
     let toggleDarkMode = () => {
       theme.value = theme.value === "dark" ? "default" : "dark";
+      window?.dispatchEvent(toggleTheme);
       changeTheme();
     };
     return { isDarkMode, toggleDarkMode };

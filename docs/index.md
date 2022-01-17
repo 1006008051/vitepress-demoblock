@@ -16,21 +16,3 @@ features:
     details: 使用原生css定义主题
 footer: Meri UI · Made by Persagy
 ---
-
-| 名称 | 类型 | 可选值                 | 默认值   | 说明 |
-| :--- | :--- | :-------------------- | :----- | :----- |
-| color | String   | 颜色名 / RGB / 十六进制 / hsl |  #8d9399    |文本头像的颜色|
-| bgColor | String   | 颜色名 / RGB / 十六进制 / hsl |  #eff0f1    |文本头像的背景色|
-| fontSize | Number   |  |  14    |文本头像的大小|
-| radius | String   |  |  100%    |圆角大小|
-| src | String   |  |  undefined    |图片头像的资源地址	|
-| size | String   | small / medium / large |  undefined    |图片头像的大小	|
-| fit | String   | fill / contain / cover / none / scale-down  |  fill    |头像的图片在容器内的的适应类型	|
-
-<script setup>
-  import { onMounted } from 'vue'
-  onMounted=(()=>{
-    debugger
-    console.log(123456789);
-  })
-</script>

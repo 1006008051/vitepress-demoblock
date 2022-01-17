@@ -18,7 +18,7 @@ defineEmits(["toggle"]);
       <NavLinks />
     </div>
     <slot name="search" />
-    <ToggleDarkModeButton />
+    <ClientOnly><ToggleDarkModeButton /></ClientOnly>
   </header>
 </template>
 

@@ -35,7 +35,7 @@ export default {
     );
     const toggleTheme = new CustomEvent("toggleTheme", {
       detail: {
-        theme: theme.value
+        theme: theme.value,
       },
     });
     const isDarkMode = computed(() => {
@@ -49,6 +49,7 @@ export default {
     changeTheme();
     let toggleDarkMode = () => {
       theme.value = theme.value === "dark" ? "default" : "dark";
+      toggleTheme.detail.theme = theme.value;
       window?.dispatchEvent(toggleTheme);
       changeTheme();
     };

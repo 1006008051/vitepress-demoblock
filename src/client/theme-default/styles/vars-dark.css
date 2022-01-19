@@ -2,11 +2,11 @@ html.dark {
   /* // brand colors */
   --c-brand: #0091ff;
   --c-brand-light: #1a9cff;
-  color-scheme: dark;
+  --color-scheme: dark;
   /* // background colors */
-  --c-bg: #22272e;
-  --c-bg-light: #2b313a;
-  --c-bg-lighter: #262c34;
+  --c-bg: #171B21;
+  --c-bg-light: #2B2B32;
+  --c-bg-lighter: #2C323E;
   --code-bg-color: #282c34;
 
   /* // text colors */

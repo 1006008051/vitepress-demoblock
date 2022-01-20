@@ -53,6 +53,7 @@ export interface UserConfig<ThemeConfig = any> {
    * @experimental
    */
   mpa?: boolean
+  importMap?: Record<string, string>
 }
 
 export type RawConfigExports =
@@ -74,6 +75,7 @@ export interface SiteConfig<ThemeConfig = any> {
   vue: VuePluginOptions | undefined
   vite: ViteConfig | undefined
   mpa: boolean
+  importMap?: Record<string, string>
 }
 
 const resolve = (root: string, file: string) =>
@@ -127,7 +129,8 @@ export async function resolveConfig(
     alias: resolveAliases(themeDir),
     vue: userConfig.vue,
     vite: userConfig.vite,
-    mpa: !!userConfig.mpa
+    mpa: !!userConfig.mpa,
+    importMap: userConfig.importMap
   }
 
   return config

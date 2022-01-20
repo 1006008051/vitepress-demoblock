@@ -27,7 +27,8 @@ export function createMarkdownToVueRenderFn(
   options: MarkdownOptions = {},
   pages: string[],
   userDefines: Record<string, any> | undefined,
-  isBuild = false
+  isBuild = false,
+  importMap?: Record<string, string>
 ) {
   const md = createMarkdownRenderer(srcDir, options)
   pages = pages.map((p) => slash(p.replace(/\.md$/, '')))
@@ -66,9 +67,12 @@ export function createMarkdownToVueRenderFn(
       return content
     })
 
+    console.log(importMap, 'importMapimportMapimportMap')
+
     const { content, data: frontmatter } = matter(src)
     md.realPath = frontmatter?.map?.realPath
     md.urlPath = file
+    md.importMap = importMap
     let { html, data } = md.render(content)
 
     const demoData = demoPlugin(html, md)

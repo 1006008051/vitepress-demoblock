@@ -12,7 +12,7 @@
 
       <div class="demo-actions">
         <div class="demo-platforms">
-          <OnlineEdit :content="decodedCodeStr" :importMap="importMap" v-show="src"/>
+          <OnlineEdit :content="decodedCodeStr" :importMap="importMap" v-show="src" />
         </div>
         <div class="demo-buttons">
           <div class="demo-actions-copy">
@@ -46,6 +46,7 @@ export default {
     componentName: String,
     htmlStr: String,
     codeStr: String,
+    importMap: String,
     language: { default: "vue", type: String },
     platforms: {
       default: () => ["codepen"],

@@ -11,12 +11,11 @@ Ut enim ad minim veniam, **strong opinion** quis nostrud exercitation ullamco la
 ## Lists
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-- List item 1
-  - Nested item A
-  - Nested item B
-- List item 2
-- List item 3
+* List item 1
+  + Nested item A
+  + Nested item B
+* List item 2
+* List item 3
 
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
@@ -32,7 +31,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, `exampleCodeBlock` sed
 
 ```js
 function exampleCodeBlock() {
-  console.log('It is Working.')
+    console.log('It is Working.')
 }
 ```
 

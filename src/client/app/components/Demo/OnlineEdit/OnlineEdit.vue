@@ -1,9 +1,5 @@
 <template>
-  <a
-    :href="sfcPlaygroundUrl"
-    style="display: flex; align-items: center"
-    target="_blank"
-  >
+  <a :href="sfcPlaygroundUrl" style="display: flex; align-items: center" target="_blank">
     <div style="width: 16px; margin-left: 6px">
       <svg
         version="1.1"
@@ -28,29 +24,27 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue'
+import { computed, defineProps } from "vue";
 
-const sfcBaseUrl = 'https://sfc.vuejs.org/'
+const sfcBaseUrl = "https://sfc.vuejs.org/";
 
 const props = defineProps<{
-  content: string
-  importMap?: string
-}>()
+  content: string;
+  importMap?: string;
+}>();
 
 const sfcPlaygroundUrl = computed(() => {
   const sfcJson = {
-    'App.vue': props.content
-  } as Record<string, string>
+    "App.vue": props.content,
+  } as Record<string, string>;
   if (props.importMap) {
     try {
-      sfcJson['import-map.json'] = JSON.stringify({
-        imports: JSON.parse(decodeURIComponent(props.importMap))
-      })
+      sfcJson["import-map.json"] = JSON.stringify({
+        imports: JSON.parse(decodeURIComponent(props.importMap)),
+      });
     } catch {}
   }
 
-  return `${sfcBaseUrl}#${btoa(
-    unescape(encodeURIComponent(JSON.stringify(sfcJson)))
-  )}`
-})
+  return `${sfcBaseUrl}#${btoa(unescape(encodeURIComponent(JSON.stringify(sfcJson))))}`;
+});
 </script>

@@ -1,7 +1,11 @@
 export default {
   lang: 'en-US',
-  title: 'VitePress',
+  title: 'vitepress-demoblock',
   description: 'Vite & Vue powered static site generator.',
+  importMap: {
+    'vue-typical':
+      'https://cdn.jsdelivr.net/npm/vue-typical@2.1.0/dist/vue-typical.es.min.js'
+  },
   themeConfig: {
     repo: 'vuejs/vitepress',
     docsDir: 'docs',

@@ -44,6 +44,7 @@ export interface MarkdownRenderer {
   render: (src: string, env?: any) => { html: string; data: any }
   realPath?: string
   urlPath?: string
+  importMap?: Record<string, string>
 }
 
 export type { Header }

@@ -45,7 +45,8 @@ export function createVitePressPlugin(
     site,
     vue: userVuePluginOptions,
     vite: userViteConfig,
-    pages
+    pages,
+    importMap
   } = siteConfig
 
   let markdownToVue: (
@@ -83,7 +84,8 @@ export function createVitePressPlugin(
         markdown,
         pages,
         config.define,
-        config.command === 'build'
+        config.command === 'build',
+        importMap
       )
     },
 

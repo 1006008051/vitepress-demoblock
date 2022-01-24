@@ -67,8 +67,6 @@ export function createMarkdownToVueRenderFn(
       return content
     })
 
-    console.log(importMap, 'importMapimportMapimportMap')
-
     const { content, data: frontmatter } = matter(src)
     md.realPath = frontmatter?.map?.realPath
     md.urlPath = file

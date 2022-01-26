@@ -34,14 +34,48 @@ export const demoPlugin = (html: string, md: any) => {
         demoMiddle = `<demo><p>${warningMsg}</p></demo>`
       } else {
         codeStr = fs.readFileSync(absolutePath).toString()
-        if (importMap && Object.keys(importMap).length) {
-          const libaryName = Object.keys(importMap)[0]
-          codeStr =
-            `\n<script setup>\nimport ${libaryName} from '${libaryName}';\n__app__.use(${libaryName});\n</script>\n` +
-            codeStr
+        let htmlStr = encodeURIComponent(highlight(codeStr, language))
+        try {
+          if (importMap && Object.keys(importMap).length) {
+            const libaryName = Object.keys(importMap)[0]
+            if (!/<\s*script.*>/.test(codeStr)) {
+              codeStr =
+                codeStr +
+                `\n<script setup>\nimport ${libaryName} from '${libaryName}';\n__app__.use(${libaryName});\n</script>\n`
+            } else if (/<\s*script\s*setup\s*>/.test(codeStr)) {
+              codeStr = codeStr.replace(
+                /<\s*script\s*setup\s*>/,
+                `<script setup>\nimport ${libaryName} from '${libaryName}';\n__app__.use(${libaryName});\n`
+              )
+            } else {
+              codeStr = codeStr.replace(
+                /<\s*script.*>/,
+                `<script>\nimport ${libaryName} from '${libaryName}';`
+              )
+              if (/<\s*script[\s\S]*setup[\s\S]*{/.test(codeStr)) {
+                let mStr = codeStr.match(/<\s*script[\s\S]*setup[\s\S]*{/)
+                  .length
+                  ? codeStr.match(/<\s*script[\s\S]*setup[\s\S]*{/)[0]
+                  : ''
+                codeStr = codeStr.replace(
+                  mStr,
+                  `${mStr}\n__app__.use(${libaryName});`
+                )
+              } else {
+                let mStr = codeStr.match(/export\s*default.*\(?{/).length
+                  ? codeStr.match(/export\s*default.*\(?{/)[0]
+                  : ''
+                codeStr = codeStr.replace(
+                  mStr,
+                  `${mStr}\nsetup(){\n__app__.use(${libaryName});\n},`
+                )
+              }
+            }
+          }
+        } catch (err) {
+          console.error(err)
         }
 
-        let htmlStr = encodeURIComponent(highlight(codeStr, language))
         let componentName = `demo${index}`
         demoMiddle = demo.replace(
           '>',

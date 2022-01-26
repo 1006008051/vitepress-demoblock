@@ -63,8 +63,8 @@ export function useUpdateHead(route: Route, siteDataByRouteRef: Ref<SiteData>) {
     // update title and description
     document.title = (pageTitle ? pageTitle + ` | ` : ``) + siteData.title
     document
-      .querySelector(`meta[name=description]`)!
-      .setAttribute('content', pageDescription || siteData.description)
+      .querySelector(`meta[name=description]`)
+      ?.setAttribute('content', pageDescription || siteData.description)
 
     updateHeadTags([
       // site head can only change during dev

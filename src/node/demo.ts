@@ -34,6 +34,13 @@ export const demoPlugin = (html: string, md: any) => {
         demoMiddle = `<demo><p>${warningMsg}</p></demo>`
       } else {
         codeStr = fs.readFileSync(absolutePath).toString()
+        if (importMap && Object.keys(importMap).length) {
+          const libaryName = Object.keys(importMap)[0]
+          codeStr =
+            `\n<script setup>\nimport ${libaryName} from '${libaryName}';\n__app__.use(${libaryName});\n</script>\n` +
+            codeStr
+        }
+
         let htmlStr = encodeURIComponent(highlight(codeStr, language))
         let componentName = `demo${index}`
         demoMiddle = demo.replace(

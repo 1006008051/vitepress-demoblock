@@ -66,7 +66,7 @@ export default {
     const decodedHtmlStr = computed(() => decodeURIComponent(props.htmlStr ?? ""));
     const decodedCodeStr = computed(() => decodeURIComponent(props.codeStr ?? ""));
 
-    const { showTip, copyCode } = useCopyCode(decodedCodeStr.value);
+    const { showTip, copyCode } = useCopyCode(decodedHtmlStr.value);
     const { expand, toggleExpand, parsedCode } = useParseCode(
       decodedCodeStr.value,
       props.jsLibsStr,

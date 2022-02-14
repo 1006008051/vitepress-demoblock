@@ -14,6 +14,10 @@
 
 }
 
+.vertical .demo-slot {
+  display: grid;
+}
+
 .demo-actions {
   display: flex;
   height: 40px;

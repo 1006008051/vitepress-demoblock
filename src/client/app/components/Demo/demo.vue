@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <article v-bind="$attrs" class="demo">
+    <article v-bind="$attrs" :class="['demo', layout]">
       <div class="demo-slot">
         <slot></slot>
       </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { computed, PropType } from "vue";
 import "./demo.css";
 import copySvg from "./icons/copy.vue";
 import codeSvg from "./icons/code.vue";
@@ -56,6 +56,11 @@ export default {
     cssLibsStr: { type: String, default: "[]" },
     title: { type: String, default: "" },
     desc: { type: String, default: "" },
+    // 布局方式
+    layout: {
+      type: String as PropType<"horizontal" | "vertical">,
+      default: "horizontal",
+    },
   },
   components: {
     copySvg,

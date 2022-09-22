@@ -1,6 +1,6 @@
 {
   "name": "vitepress-demoblock",
-  "version": "0.1.16",
+  "version": "0.1.25",
   "description": "vitepress for demo",
   "main": "dist/node/index.js",
   "typings": "types/index.d.ts",

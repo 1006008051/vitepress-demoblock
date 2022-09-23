@@ -1,135 +1,31 @@
 {
   "name": "vitepress-demoblock",
-  "version": "0.1.25",
-  "description": "vitepress for demo",
-  "main": "dist/node/index.js",
-  "typings": "types/index.d.ts",
-  "bin": {
-    "vitepress": "bin/vitepress.js"
+  "version": "1.0.0",
+  "description": "vitepress 代码示例",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "less": "^4.1.3",
+    "vitepress": "^1.0.0-alpha.15"
   },
-  "files": [
-    "bin",
-    "dist",
-    "types"
-  ],
   "scripts": {
-    "dev": "run-s dev-shared dev-start",
-    "dev-start": "run-p dev-client dev-node dev-watch",
-    "dev-client": "tsc -w -p src/client",
-    "dev-node": "tsc -w -p src/node",
-    "dev-shared": "node scripts/copyShared",
-    "dev-watch": "node scripts/watchAndCopy",
-    "build": "run-s build-prepare build-client build-node build-types",
-    "build-prepare": "rimraf -rf dist && node scripts/copyShared",
-    "build-client": "tsc -p src/client && node scripts/copyClient",
-    "build-node": "rollup -c scripts/rollup.config.js",
-    "build-types": "run-s build-types-client build-types-node",
-    "build-types-client": "tsc -p src/client --declaration --emitDeclarationOnly --outDir dist/temp && api-extractor run -c api-extractor.client.json && rimraf dist/temp",
-    "build-types-node": "tsc -p src/node --declaration --emitDeclarationOnly --outDir dist/temp && api-extractor run -c api-extractor.node.json && rimraf dist/temp",
-    "lint": "run-s lint:js lint:ts",
-    "lint:js": "prettier --check --write \"{bin,docs,scripts,src}/**/*.js\"",
-    "lint:ts": "prettier --check --write --parser typescript \"{__tests__,src,docs,types}/**/*.ts\"",
-    "test": "jest",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "node scripts/release.js",
-    "docs": "run-p dev docs-dev",
-    "docs-dev": "node ./bin/vitepress dev docs",
-    "docs-debug": "node --inspect-brk ./bin/vitepress dev docs",
-    "docs-build": "npm run build && node ./bin/vitepress build docs",
-    "docs-serve": "node ./bin/vitepress serve docs",
-    "ci-docs": "run-s build docs-build"
-  },
-  "engines": {
-    "node": ">=12.0.0"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write"
-    ],
-    "*.ts": [
-      "prettier --parser=typescript --write"
-    ]
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:serve": "vitepress serve"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:1006008051/vitepress-demoblock.git"
+    "url": "git+https://github.com/1006008051/vitepress-demoblock.git"
   },
   "keywords": [
-    "vite",
-    "vue",
-    "vitepress",
-    "vitepress-demoblock",
-    "vitepress-for-omponent"
+    "vite3",
+    "vitepress-demo",
+    "vue3"
   ],
-  "author": "wangyongcun",
-  "license": "MIT",
-  "homepage": "https://github.com/vuejs/vitepress/tree/master/#readme",
+  "author": "王永存",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vuejs/vitepress/issues"
+    "url": "https://github.com/1006008051/vitepress-demoblock/issues"
   },
-  "dependencies": {
-    "@docsearch/css": "^3.0.0-alpha.41",
-    "@docsearch/js": "^3.0.0-alpha.41",
-    "@vitejs/plugin-vue": "^2.0.0",
-    "chalk": "^4.1.1",
-    "chokidar": "^3.5.1",
-    "compression": "^1.7.4",
-    "conventional-changelog-cli": "^2.1.1",
-    "debug": "^4.3.2",
-    "diacritics": "^1.3.0",
-    "enquirer": "^2.3.6",
-    "esbuild": "^0.13.4",
-    "escape-html": "^1.0.3",
-    "execa": "^5.0.0",
-    "fs-extra": "^10.0.0",
-    "globby": "^11.0.3",
-    "gray-matter": "^4.0.3",
-    "jest": "^27.0.1",
-    "less": "^4.1.2",
-    "lint-staged": "^11.0.0",
-    "lru-cache": "^6.0.0",
-    "markdown-it": "^12.0.6",
-    "markdown-it-anchor": "^8.1.2",
-    "markdown-it-attrs": "^4.0.0",
-    "markdown-it-container": "^3.0.0",
-    "markdown-it-emoji": "^2.0.0",
-    "markdown-it-table-of-contents": "^0.5.2",
-    "minimist": "^1.2.5",
-    "npm-run-all": "^4.1.5",
-    "ora": "^5.4.0",
-    "polka": "^0.5.2",
-    "prettier": "^2.3.0",
-    "prismjs": "^1.25.0",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.56.3",
-    "rollup-plugin-esbuild": "^4.5.0",
-    "semver": "^7.3.5",
-    "sirv": "^1.0.12",
-    "ts-jest": "^27.0.1",
-    "typescript": "^4.3.2",
-    "vite": "^2.7.0",
-    "vue": "^3.2.26",
-    "yorkie": "^2.0.0"
-  },
-  "devDependencies": {
-    "@microsoft/api-extractor": "^7.18.9",
-    "@rollup/plugin-alias": "^3.1.5",
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@types/compression": "^1.7.0",
-    "@types/debug": "^4.1.7",
-    "@types/fs-extra": "^9.0.11",
-    "@types/jest": "^26.0.23",
-    "@types/koa": "^2.13.1",
-    "@types/koa-static": "^4.0.1",
-    "@types/lru-cache": "^5.1.0",
-    "@types/markdown-it": "^12.0.1",
-    "@types/node": "^15.6.1",
-    "@types/polka": "^0.5.3",
-    "vue-typical": "^2.1.0"
-  }
+  "homepage": "https://github.com/1006008051/vitepress-demoblock#readme"
 }

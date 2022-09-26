@@ -11,9 +11,9 @@
     <!-- 代码展示 -->
     <div class="demo-show" v-show="isExpanded">
       <!-- 描述 -->
-      <div class="demo-show_desc">124545</div>
+      <div class="demo-show_desc" v-show="decodedDesc" v-html="decodedDesc"></div>
       <!-- 代码 -->
-      <div v-text="decodedCodeStr" :class="`language-vue extra-class`"></div>
+      <div v-html="decodedHtmlStr"></div>
     </div>
     <!-- 按钮控制 -->
     <div class="demo-control" @click="onClickControl">
@@ -47,12 +47,16 @@ import { computed, defineAsyncComponent, ref } from "vue";
 export default {
   props: {
     codeStr: String,
+    htmlStr: String,
+    description: String,
     codePath: String,
     language: { default: "vue", type: String },
   },
   setup(props) {
-    const hover = ref(true); //鼠标是否悬浮之上
+    const hover = ref(false); //鼠标是否悬浮之上
     const decodedCodeStr = computed(() => decodeURIComponent(props.codeStr ?? ""));
+    const decodedHtmlStr = computed(() => decodeURIComponent(props.htmlStr ?? ""));
+    const decodedDesc = computed(() => decodeURIComponent(props.description ?? ""));
     // 注册演示组件
     const demoSlot = defineAsyncComponent(
       () => import(/* @vite-ignore */ props.codePath)
@@ -76,6 +80,8 @@ export default {
       demoSlot,
       isExpanded,
       decodedCodeStr,
+      decodedHtmlStr,
+      decodedDesc,
       onCopy,
       onClickControl,
     };
@@ -104,6 +110,25 @@ export default {
     padding: 24px;
     transition: 0.2s;
     overflow: auto;
+  }
+  &-show {
+    border-top: solid 1px #ebebeb;
+    background-color: var(--vp-code-block-bg);
+    &_desc {
+      border: solid 1px #ebebeb;
+      border-radius: 3px;
+      padding: 20px;
+      box-sizing: border-box;
+      line-height: 26px;
+      color: var(--c-text);
+      word-break: break-word;
+      margin: 10px 10px 6px 10px;
+      background-color: #fff;
+    }
+    pre {
+      margin: 0;
+      padding: 1.25rem 1.5rem;
+    }
   }
   &-control {
     border-top: solid 1px #eaeefb;

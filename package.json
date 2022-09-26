@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "vitepress 代码示例",
   "main": "index.js",
+  "type": "module",
   "dependencies": {},
   "devDependencies": {
     "less": "^4.1.3",

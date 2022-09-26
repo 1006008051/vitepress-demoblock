@@ -1,6 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-// const { highlight } = require('vitepress/dist/node/markdown/plugins/highlight')
+
+import fs from 'fs';
+import path from 'path';
+import { getHighlighter } from 'shiki';
+
+const { codeToHtml } = await getHighlighter({
+    theme: 'material-palenight'
+});
+
 const demoComponentsPath = path.resolve(__dirname, './components/demo.vue');
 
 /**
@@ -22,8 +28,7 @@ const getRelativePath = (path1 = '', path2 = '') => {
         }
     }
     return relativePath;
-}
-
+};
 
 export default (md) => {
     const render = md.render;
@@ -33,20 +38,25 @@ export default (md) => {
         const demoReg = /<demo[\s\S]*?>([\s\S]*?)<\/demo>/; // 匹配demo标签
         const demoReg_g = new RegExp(demoReg, 'g');
         const demoLabels = result.match(demoReg_g);// 获取所有的demo标签
-        demoLabels?.forEach(demo => {
-            const demoSrc = (demo.match(/<demo[^>]+src=("|')(\S+)('|")/) || [])[2]; //demo src
+        demoLabels?.forEach(async (demo) => {
+            const demoSrc = (demo.match(/<demo[^>]+src=['"]([^'"]+)['"]/) || [])[1]; //demo src
+            const demoLang = (demo.match(/<demo[^>]+lang=['"]([^'"]+)['"]/) || [])[1] || 'vue'; //demo lang
+            const demoDesc = (demo.match(/<demo[^>]+desc=['"]([^'"]+)['"]/) || [])[1]; //demo desc
             const demoPath = path.resolve(docPath, '../', demoSrc);//demo的绝对路径
             const demoRelativePath = getRelativePath(demoComponentsPath, demoPath);            // 获取demo的相对路径
             let demoStr = ''; //demo中间字符串
             if (!demoSrc || !fs.existsSync(demoPath)) {
                 demoStr = "src不存在, 请检查配置!"
             } else {
-                codeStr = fs.readFileSync(demoPath).toString();
+                let codeStr = fs.readFileSync(demoPath).toString();
+                let htmlStr = codeToHtml(codeStr, { lang: demoLang });
+
+                let descStr = demoDesc ? md.renderInline(demoDesc) : "";
                 demoStr = demo.replace(
                     '>',
                     ` codeStr="${encodeURIComponent(
                         codeStr
-                    )}" codePath="${demoRelativePath}">`
+                    )}" htmlStr="${encodeURIComponent(htmlStr)}" description="${encodeURIComponent(descStr)}" codePath="${demoRelativePath}">`
                 );
             }
             result = result.replace(demo, demoStr);

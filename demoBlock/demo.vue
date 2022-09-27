@@ -12,8 +12,13 @@
     <div class="demo-show" v-show="isExpanded">
       <!-- 描述 -->
       <div class="demo-show_desc" v-show="decodedDesc" v-html="decodedDesc"></div>
+      <!-- 复制 -->
+      <div class="demo-show-copy" @click.stop="onCopy"></div>
       <!-- 代码 -->
-      <div v-html="decodedHtmlStr"></div>
+      <div
+        :class="['demo-show-code', 'language-' + language]"
+        v-html="decodedHtmlStr"
+      ></div>
     </div>
     <!-- 按钮控制 -->
     <div class="demo-control" @click="onClickControl">
@@ -30,20 +35,13 @@
           isExpanded ? "隐藏代码" : "显示代码"
         }}</span>
       </transition>
-      <!-- 复制代码 -->
-      <div class="demo-control-copy">
-        <transition name="text-slide">
-          <span v-show="isExpanded" class="demo-control-copy_text" @click.stop="onCopy">
-            复制代码
-          </span>
-        </transition>
-      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineAsyncComponent, ref } from "vue";
+const timeoutIdMap = new Map();
 export default {
   props: {
     codeStr: String,
@@ -68,9 +66,18 @@ export default {
       hover.value = isExpanded.value;
     };
     // 复制代码
-    const onCopy = async () => {
+    const onCopy = async (e) => {
       try {
         navigator.clipboard.writeText(decodedCodeStr.value);
+        const el = e.target;
+        el.classList.add("demo-show-copied");
+        clearTimeout(timeoutIdMap.get(el));
+        const timeoutId = setTimeout(() => {
+          el.classList.remove("demo-show-copied");
+          el.blur();
+          timeoutIdMap.delete(el);
+        }, 2000);
+        timeoutIdMap.set(el, timeoutId);
       } catch (err) {
         console.log("复制代码失败");
       }
@@ -92,14 +99,14 @@ export default {
 <style lang="less">
 .demo {
   margin: 10px 0;
-  border: solid 1px #ebebeb;
+  border: solid 1px var(--vp-c-divider-light);
   border-radius: 3px;
   transition: 0.2s;
   &-hover {
-    box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6), 0 2px 4px 0 rgba(232, 237, 250, 0.5);
+    box-shadow: var(--vp-shadow-2);
     .demo-control {
-      color: var(--c-brand);
-      background-color: #f9fafc;
+      color: var(--vp-c-brand);
+      background-color: var(--vp-c-brand-dimm);
       &-icon {
         transform: translateX(-40px);
       }
@@ -112,34 +119,77 @@ export default {
     overflow: auto;
   }
   &-show {
-    border-top: solid 1px #ebebeb;
+    position: relative;
+    border-top: solid 1px var(--vp-c-divider-light);
     background-color: var(--vp-code-block-bg);
     &_desc {
-      border: solid 1px #ebebeb;
+      border: solid 1px var(--vp-c-divider-light);
       border-radius: 3px;
       padding: 20px;
       box-sizing: border-box;
       line-height: 26px;
-      color: var(--c-text);
+      color: var(--vp-c-text-2);
       word-break: break-word;
       margin: 10px 10px 6px 10px;
-      background-color: #fff;
+      background-color: var(--vp-c-bg-soft);
+    }
+    &-code {
+      margin-bottom: 0 !important;
+    }
+    &-copy {
+      position: absolute;
+      right: 8px;
+      z-index: 2;
+      display: block;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+      width: 40px;
+      height: 40px;
+      background-color: var(--vp-code-block-bg);
+      cursor: pointer;
+      background-image: var(--vp-icon-copy);
+      background-position: 50%;
+      background-size: 20px;
+      background-repeat: no-repeat;
+      transition: opacity 0.25s;
+    }
+    &-copied {
+      border-radius: 0 4px 4px 0;
+      background-color: var(--vp-code-copy-code-hover-bg);
+      background-image: var(--vp-icon-copied);
+      &:before {
+        position: relative;
+        left: -65px;
+        display: block;
+        border-radius: 4px 0 0 4px;
+        padding-top: 8px;
+        width: 64px;
+        height: 40px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--vp-code-copy-code-active-text);
+        background-color: var(--vp-code-copy-code-hover-bg);
+        white-space: nowrap;
+        content: "Copied";
+      }
     }
     pre {
       margin: 0;
       padding: 1.25rem 1.5rem;
+      background-color: inherit !important;
     }
   }
   &-control {
-    border-top: solid 1px #eaeefb;
+    border-top: 1px solid var(--vp-c-divider-light);
     height: 44px;
     box-sizing: border-box;
-    background-color: #fff;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     text-align: center;
     margin-top: -1px;
-    color: #d3dce6;
+    color: var(--vp-c-gray-light-2);
     cursor: pointer;
     position: relative;
     &-icon {
@@ -181,21 +231,6 @@ export default {
       font-weight: 500;
       transition: 0.3s;
       display: inline-block;
-    }
-    &-copy {
-      line-height: 43px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding-left: 5px;
-      padding-right: 25px;
-      &_text {
-        padding: 13px 0;
-        color: rebeccapurple;
-        font-size: 14px;
-        font-weight: 500;
-        margin: 0 10px;
-      }
     }
   }
   // 动画

@@ -4,6 +4,11 @@
   "description": "vitepress 代码示例",
   "main": "index.js",
   "type": "module",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "homepage": "https://www.naiveui.com",
   "dependencies": {},
   "devDependencies": {
     "less": "^4.1.3",
@@ -19,14 +24,13 @@
     "url": "git+https://github.com/1006008051/vitepress-demoblock.git"
   },
   "keywords": [
-    "vite3",
+    "vitepress-demoblock",
+    "vitepress",
     "vitepress-demo",
-    "vue3"
+    "vitepress-theme",
+    "vue代码组件示例",
+    "vitepress代码组件示例"
   ],
-  "author": "王永存",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/1006008051/vitepress-demoblock/issues"
-  },
-  "homepage": "https://github.com/1006008051/vitepress-demoblock#readme"
+  "author": "Wang Yongcun",
+  "license": "ISC"
 }

@@ -4,10 +4,11 @@ import path from 'path';
 import { getHighlighter } from 'shiki';
 
 const { codeToHtml } = await getHighlighter({
-    theme: 'material-palenight'
+    theme: 'material-palenight',
+    lineNumbers: true
 });
 
-const demoComponentsPath = path.resolve(__dirname, './components/demo.vue');
+const demoComponentsPath = path.resolve(__dirname, './demo.vue');
 
 /**
  * 同一项目下的两个绝对路径转为相对路径（path2相对于path1）

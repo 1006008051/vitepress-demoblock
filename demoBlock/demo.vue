@@ -99,13 +99,17 @@ export default {
 <style lang="less">
 .demo {
   margin: 10px 0;
+  // demo边框
   border: solid 1px var(--vp-c-divider-light);
   border-radius: 3px;
   transition: 0.2s;
   &-hover {
+    // 悬浮阴影
     box-shadow: var(--vp-shadow-2);
     .demo-control {
+      // 控制按钮悬浮时的文字颜色
       color: var(--vp-c-brand);
+      // 控制按钮悬浮时的背景色
       background-color: var(--vp-c-brand-dimm);
       &-icon {
         transform: translateX(-40px);
@@ -120,17 +124,22 @@ export default {
   }
   &-show {
     position: relative;
+    // 边框
     border-top: solid 1px var(--vp-c-divider-light);
+    // 代码框背景色
     background-color: var(--vp-code-block-bg);
     &_desc {
+      // 边框
       border: solid 1px var(--vp-c-divider-light);
       border-radius: 3px;
       padding: 20px;
       box-sizing: border-box;
       line-height: 26px;
+      // 描述文字颜色
       color: var(--vp-c-text-2);
       word-break: break-word;
       margin: 10px 10px 6px 10px;
+      // 描述文字框背景色
       background-color: var(--vp-c-bg-soft);
     }
     &-code {
@@ -146,8 +155,10 @@ export default {
       border-radius: 4px;
       width: 40px;
       height: 40px;
+      // 复制代码背景色
       background-color: var(--vp-code-block-bg);
       cursor: pointer;
+      // 复制代码背景图片
       background-image: var(--vp-icon-copy);
       background-position: 50%;
       background-size: 20px;
@@ -156,7 +167,9 @@ export default {
     }
     &-copied {
       border-radius: 0 4px 4px 0;
+      // 已复制代码背景色
       background-color: var(--vp-code-copy-code-hover-bg);
+      // 已复制代码背景图片
       background-image: var(--vp-icon-copied);
       &:before {
         position: relative;
@@ -182,6 +195,7 @@ export default {
     }
   }
   &-control {
+    // 控制按钮的边框
     border-top: 1px solid var(--vp-c-divider-light);
     height: 44px;
     box-sizing: border-box;
@@ -189,6 +203,7 @@ export default {
     border-bottom-right-radius: 4px;
     text-align: center;
     margin-top: -1px;
+    // 控制按钮的文字颜色
     color: var(--vp-c-gray-light-2);
     cursor: pointer;
     position: relative;

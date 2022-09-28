@@ -1,6 +1,13 @@
-### 安装
+# 快速上手
+vitepress-demoblock 致力于为vitepress添加更专业的Demo演示能力
 
-我们建议您使用包管理器 (NPM,[Yarn](https://classic.yarnpkg.com/lang/en/), [pnpm](https://pnpm.io/)) 安装  <code>vitepress-demoblock</code>
+::: tip
+在开始之前，推荐先学习 [vue](https://vuejs.org/) 和 [vitepress](https://vitepress.vuejs.org/)，并正确安装和配置了 Node.js v14 或以上。官方指南假设你已了解关于 vue 和 vitepress 的中级知识，并且已经完全掌握了 vue 的正确开发方式。
+:::
+
+## 安装
+
+我们建议您使用包管理器 (NPM,[Yarn](https://classic.yarnpkg.com/lang/en/), [pnpm](https://pnpm.io/) 安装  <code>vitepress-demoblock</code>
 ```sh
 # 选择一个你喜欢的包管理器
 
@@ -14,7 +21,7 @@ $ yarn add vitepress-demoblock
 $ pnpm install vitepress-demoblock
 ```
 
-### 引入
+## 引入
 先注册 <code>vitepress-demoblock</code> 提供的markdown解析插件
 ```js
 // .vitepress/config.ts or .vitepress/config.js

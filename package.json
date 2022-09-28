@@ -12,6 +12,7 @@
   "dependencies": {},
   "devDependencies": {
     "less": "^4.1.3",
+    "sass": "^1.55.0",
     "vitepress": "^1.0.0-alpha.15"
   },
   "scripts": {

@@ -3,7 +3,7 @@ layout: home
 
 hero:
 #   name: vitepress-demoblock
-  text: vitepress代码示例
+  text: vitepress demo演示
   tagline: 为vitepress添加更专业的Demo演示能力
 #   image:
 #     src: /logo.svg
@@ -24,5 +24,5 @@ features:
     details: 结合vitepress样式变量进行主题设计，改动样式变量即可定义自己的主题风格
   - icon: 🛠️
     title: DEMO注册
-    details: 以Markdown为中心，Markdown插件+采用异步组件+动态组件完成DEMO引入演示
+    details: 以Markdown为中心，Markdown插件+异步组件+动态组件完成DEMO引入演示
 ---

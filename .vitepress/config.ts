@@ -1,4 +1,4 @@
-import demoBlock from '../demoBlock/index';
+import demoBlock from '../demoblock/index';
 export default {
     srcDir: "./",
     lang: 'zh-CN',
@@ -17,7 +17,7 @@ export default {
         // 顶部导航
         nav: [
             { text: '开发指南', link: '/docs/guide/quickstart' },
-            { text: '组件演示', link: '/docs/guide/11' },
+            { text: '组件演示', link: '/docs/demo/button' },
             {
                 text: '相关链接', items: [
                     {
@@ -33,7 +33,7 @@ export default {
             },
         ],
         sidebar: {
-            '/docs/guide/': [
+            '/docs/': [
                 {
                     text: '开发指南',
                     items: [
@@ -47,7 +47,7 @@ export default {
                         },
                         {
                             text: '定制主题',
-                            link: '/docs/guide/customize-theme'
+                            link: '/docs/guide/theme'
                         },
                         {
                             text: '更新日志',
@@ -59,8 +59,24 @@ export default {
                     text: '组件演示',
                     items: [
                         {
-                            text: '安装',
-                            link: '/docs/guide/installation'
+                            text: 'Button 按钮',
+                            link: '/docs/demo/button'
+                        },
+                        {
+                            text: 'Layout 布局',
+                            link: '/docs/demo/layout'
+                        },
+                        {
+                            text: 'Scrollbar 滚动条',
+                            link: '/docs/demo/scrollbar'
+                        },
+                        {
+                            text: 'Rate 评分',
+                            link: '/docs/demo/rate'
+                        },
+                        {
+                            text: 'Avatar 头像',
+                            link: '/docs/demo/avatar'
                         },
                     ]
                 }

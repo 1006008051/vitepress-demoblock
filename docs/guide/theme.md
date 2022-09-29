@@ -39,5 +39,3 @@ vitepress默认提供的有暗黑主题和亮色主题两种模式，如果需�
     
 }
 ```
-
-<demo src="../../test/test.vue"></demo>

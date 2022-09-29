@@ -1,4 +1,4 @@
-import demoBlock from '../demoblock/index';
+import demoblock from '../demoblock';
 export default {
     srcDir: "./",
     lang: 'zh-CN',
@@ -10,7 +10,7 @@ export default {
             level: [0, 0]
         },
         config: (md) => {
-            md.use(demoBlock)
+            md.use(demoblock)
         }
     },
     themeConfig: {
@@ -38,7 +38,7 @@ export default {
                     text: '开发指南',
                     items: [
                         {
-                            text: '设计',
+                            text: '简介',
                             link: '/docs/guide/devise'
                         },
                         {
@@ -77,6 +77,10 @@ export default {
                         {
                             text: 'Avatar 头像',
                             link: '/docs/demo/avatar'
+                        },
+                        {
+                            text: 'Input 输入框',
+                            link: '/docs/demo/input'
                         },
                     ]
                 }

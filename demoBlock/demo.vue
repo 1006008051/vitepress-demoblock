@@ -6,7 +6,8 @@
   >
     <!-- 组件展示 -->
     <div class="demo-slot">
-      <component :is="demoSlot" />
+      <component :is="demoSlot" v-if="codePath" />
+      <div v-else>src 路径不存在，请检查配置</div>
     </div>
     <!-- 代码展示 -->
     <div class="demo-show" v-show="isExpanded">
@@ -84,6 +85,7 @@ export default {
     };
     return {
       hover,
+      codePath: props.codePath,
       demoSlot,
       isExpanded,
       decodedCodeStr,

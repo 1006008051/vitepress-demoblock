@@ -22,7 +22,7 @@ $ pnpm install vitepress-demoblock
 ```
 
 ## 引入
-先注册 <code>vitepress-demoblock</code> 提供的markdown解析插件
+先注册 `vitepress-demoblock` 提供的markdown解析插件
 ```js
 // .vitepress/config.ts or .vitepress/config.js
 import demoblock from 'vitepress-demoblock';
@@ -36,7 +36,7 @@ export default {
     },
 }
 ```
-再引入 <code>vitepress-demoblock</code> 提供的demo组件
+再引入 `vitepress-demoblock` 提供的demo组件
 ```js
 // .vitepress/theme/index.ts or .vitepress/theme/index.js
 import DefaultTheme from 'vitepress/theme'; //引入默认主题
@@ -47,9 +47,13 @@ export default {
         app.component('demo', demo)
     }
 ```
-在md文件中使用
+## 使用
+
+###### 输入
 ```
-// demo.md
-<demo src="./test.vue" lang="vue" desc="代码示例"></demo>
+<demo src="../component/button.vue" desc="使用 `type`、`plain`、`round` 和 `circle` 来定义按钮的样式。"></demo>
 ```
+###### 输出
+<demo src="../component/test.vue" desc="使用 `type`、`plain`、`round` 和 `circle` 来定义按钮的样式。"></demo>
+
 

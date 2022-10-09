@@ -5,8 +5,7 @@
 
 ## 文档
 
-[www.naiveui.com](http://www.naiveui.com)
-
+[vitepress-demoblock](https://1006008051.github.io/vitepress-demoblock)
 
 ## 安装
 

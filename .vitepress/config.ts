@@ -88,7 +88,7 @@ export default {
         },
         // 社交信息栏
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+            { icon: 'github', link: 'https://github.com/1006008051/vitepress-demoblock' }
         ],
         // 底部信息栏
         footer: {

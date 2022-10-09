@@ -5,9 +5,9 @@ hero:
 #   name: vitepress-demoblock
   text: vitepress demoblock
   tagline: 为vitepress添加更专业的Demo演示能力
-  image:
-    src: /logo.svg
-    alt: VitePress
+  # image:
+  #   src: /logo.svg
+  #   alt: VitePress
   actions:
     - theme: brand
       text: 开始

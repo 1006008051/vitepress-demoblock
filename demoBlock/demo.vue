@@ -42,6 +42,8 @@
 
 <script lang="ts">
 import { computed, defineAsyncComponent, ref } from "vue";
+// @ts-ignore
+const modules = import.meta.glob("../**/*.vue");
 const timeoutIdMap = new Map();
 export default {
   props: {
@@ -57,9 +59,7 @@ export default {
     const decodedHtmlStr = computed(() => decodeURIComponent(props.htmlStr ?? ""));
     const decodedDesc = computed(() => decodeURIComponent(props.description ?? ""));
     // 注册演示组件
-    const demoSlot = defineAsyncComponent(
-      () => import(/* @vite-ignore */ props.codePath)
-    );
+    const demoSlot = defineAsyncComponent(modules[props.codePath]);
     // 展开or收起代码
     const isExpanded = ref(false);
     const onClickControl = () => {

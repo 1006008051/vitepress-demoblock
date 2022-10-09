@@ -25,9 +25,41 @@ vitepress 凭借着 vite 的秒级启动速度、markdown-it 的强大扩展能�
 
 你所写的 markdown 文档最终都会转成 vue 组件。其原理很简单：把 markdown 渲染成 html 字符串，然后动态生成一个 vue 组件，模版内容就是渲染好的 html 字符串。所以它支持在 markdown 里运行 vue 组件顺理成章。目前已有的解决方案也都是基于markdown插件进行着手的。
 ##### vitepress-demoblock
-
-对比其他实现方案：
-
+处理方式参照了vitepress-for-component的写法，全局注册demo组件进行实现。例如：
+```
+<demo src="../component/button.vue" desc="使用 `type`、`plain`、`round` 和 `circle` 来定义按钮的样式。" lang="vue"></demo>
+```
+内部原理基于 [markdow-it](https://markdown-it.docschina.org/) 插件：
+```js
+   // ...
+    md.render = (...args) => {
+         // ...
+        const demoReg = /<demo[\s\S]*?>([\s\S]*?)<\/demo>/; // 匹配demo标签
+        const demoReg_g = new RegExp(demoReg, 'g');
+        const demoLabels = result.match(demoReg_g);// 获取所有的demo标签
+        demoLabels?.forEach(async (demo) => {
+            const demoSrc = getDemoLableAttr(demo, 'src'); //demo src
+            const demoLang = getDemoLableAttr(demo, 'lang') || 'vue'; //demo lang
+            const demoDesc = getDemoLableAttr(demo, 'desc'); //demo desc
+            const demoPath = path.resolve(docPath, '../', demoSrc);//demo md的绝对路径
+            const existSrc = demoSrc && fs.existsSync(demoPath); // 判断 src 是否存在且正确
+            if (existSrc) {
+                const demoRelativePath = getRelativePath(demoComponentsPath, demoPath);// 获取demo的相对路径
+                let codeStr = fs.readFileSync(demoPath).toString();//demo中间字符串
+                let htmlStr = codeToHtml(codeStr, { lang: demoLang });//demo的html字符串
+                let descStr = md.renderInline(demoDesc) || "";//demo的desc字符串
+                let demoStr = demo.replace(
+                    '>',
+                    ` codeStr="${encodeURIComponent(
+                        codeStr
+                    )}" htmlStr="${encodeURIComponent(htmlStr)}" description="${encodeURIComponent(descStr)}" codePath="${demoRelativePath}">`
+                );
+                result = result.replace(demo, demoStr);
+            }
+        });
+        return result
+    }
+```
 ##### element-plus
 element-plus 使用 [markdown-it-container](https://github.com/markdown-it/markdown-it-container#readme) 创建了一个自定义容器，使用方式类似于：
 

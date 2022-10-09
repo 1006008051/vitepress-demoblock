@@ -23,7 +23,7 @@ const getRelativePath = (path1 = "", path2 = "") => {
     for (let i = 0; i < path1ArrLen - 1; i++) {
         if (path2Arr[i] != path1Arr[i]) {
             if (path1ArrLen - i > 1) {
-                relativePath += new Array(path1ArrLen - i).join("../../");
+                relativePath += new Array(path1ArrLen - i).join('../');
             }
             relativePath += path2Arr.splice(i).join('/');
             break;

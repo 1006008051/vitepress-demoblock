@@ -2,6 +2,7 @@ import demoblock from '../demoblock';
 export default {
     srcDir: "./",
     outDir: './docs',
+    base: '/vitepress-demoblock/',
     lang: 'zh-CN',
     title: 'vitepress-demoblock',    // 标题
     description: '基于vitepress最新版的组件库代码示例插件',    // 描述

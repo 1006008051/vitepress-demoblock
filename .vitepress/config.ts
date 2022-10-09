@@ -1,6 +1,7 @@
 import demoblock from '../demoblock';
 export default {
     srcDir: "./",
+    outDir: './docs',
     lang: 'zh-CN',
     title: 'vitepress-demoblock',    // 标题
     description: '基于vitepress最新版的组件库代码示例插件',    // 描述
@@ -16,8 +17,8 @@ export default {
     themeConfig: {
         // 顶部导航
         nav: [
-            { text: '开发指南', link: '/docs/guide/quickstart' },
-            { text: '组件演示', link: '/docs/demo/button' },
+            { text: '开发指南', link: '/demo/guide/quickstart' },
+            { text: '组件演示', link: '/demo/md/button' },
             {
                 text: '相关链接', items: [
                     {
@@ -33,25 +34,25 @@ export default {
             },
         ],
         sidebar: {
-            '/docs/': [
+            '/demo/': [
                 {
                     text: '开发指南',
                     items: [
                         {
                             text: '简介',
-                            link: '/docs/guide/devise'
+                            link: '/demo/guide/devise'
                         },
                         {
                             text: '快速上手',
-                            link: '/docs/guide/quickstart'
+                            link: '/demo/guide/quickstart'
                         },
                         {
                             text: '定制主题',
-                            link: '/docs/guide/theme'
+                            link: '/demo/guide/theme'
                         },
                         {
                             text: '更新日志',
-                            link: '/docs/guide/changelog'
+                            link: '/demo/guide/changelog'
                         },
                     ]
                 },
@@ -60,27 +61,27 @@ export default {
                     items: [
                         {
                             text: 'Button 按钮',
-                            link: '/docs/demo/button'
+                            link: '/demo/md/button'
                         },
                         {
                             text: 'Layout 布局',
-                            link: '/docs/demo/layout'
+                            link: '/demo/md/layout'
                         },
                         {
                             text: 'Scrollbar 滚动条',
-                            link: '/docs/demo/scrollbar'
+                            link: '/demo/md/scrollbar'
                         },
                         {
                             text: 'Rate 评分',
-                            link: '/docs/demo/rate'
+                            link: '/demo/md/rate'
                         },
                         {
                             text: 'Avatar 头像',
-                            link: '/docs/demo/avatar'
+                            link: '/demo/md/avatar'
                         },
                         {
                             text: 'Input 输入框',
-                            link: '/docs/demo/input'
+                            link: '/demo/md/input'
                         },
                     ]
                 }

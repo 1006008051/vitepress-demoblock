@@ -1,12 +1,13 @@
 {
-  "private": true,
+  "private": false,
   "name": "vitepress-demoblock",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "为vitepress添加更专业的Demo演示能力",
   "type": "module",
-  "main": "demoblock/index.js",
+  "main": "index.js",
   "files": [
-    "module",
+    "index.js",
+    "demo.vue",
     "README.md"
   ],
   "repository": {
@@ -23,7 +24,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "dev": "vitepress dev",
+    "dev": "vitepress dev --mode _local",
     "build": "vitepress build",
     "serve": "vitepress serve"
   },
@@ -38,8 +39,10 @@
   ],
   "devDependencies": {
     "@types/node": "^18.7.23",
+    "element-plus": "^2.2.17",
     "less": "^4.1.3",
     "sass": "^1.55.0",
-    "vitepress": "^1.0.0-alpha.15"
+    "vitepress": "^1.0.0-alpha.19",
+    "vitepress-demoblock": "^1.0.0-alpha"
   }
 }

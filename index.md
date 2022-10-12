@@ -14,7 +14,7 @@ hero:
       link: /demo/guide/quickstart
     - theme: alt
       text: 在GitHub上查看
-      link: https://github.com/vuejs/vitepress
+      link: https://github.com/1006008051/vitepress-demoblock
 features:
   - icon: ⚡️
     title: 基于vitepress

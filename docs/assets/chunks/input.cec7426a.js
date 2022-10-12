@@ -1,1 +1,0 @@
-import{f as l,x as a,o as p,i as u,e as s}from"../app.ceaa2499.js";const _=l({__name:"input",setup(r){const e=a("");return(m,o)=>{const n=s("el-input");return p(),u(n,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t),placeholder:"Please input"},null,8,["modelValue"])}}});export{_ as default};

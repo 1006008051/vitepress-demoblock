@@ -98,9 +98,9 @@ export default {
             copyright: 'Copyright © 2022-present Wang Yongcun'
         },
         // 广告栏
-        carbonAds: {
-            code: 'CEBDT27Y',
-            placement: 'vuejsorg'
-        }
+        // carbonAds: {
+        //     code: 'CEBDT27Y',
+        //     placement: 'vuejsorg'
+        // }
     }
 }

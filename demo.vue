@@ -42,13 +42,10 @@
 
 <script lang="ts">
 import { computed, defineAsyncComponent, ref } from "vue";
-const modules =
-  // @ts-ignore
-  import.meta.env.VITE_NODE_ENV == "local"
-    ? // @ts-ignore
-      import.meta.glob("./**/*.vue")
-    : // @ts-ignore
-      import.meta.glob("../../**/*.vue");
+// @ts-ignore
+const modules = import.meta.glob("./**/*.vue");
+// @ts-ignore npm publish时
+// const modules = import.meta.glob("../../**/*.vue");
 const timeoutIdMap = new Map();
 export default {
   props: {

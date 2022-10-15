@@ -1,8 +1,8 @@
 node_modules
 .vscode
 dist
-sccript/index.cjs.js
-sccript/index.es.js
-sccript/index.d.ts
-sccript/package.json
-sccript/README.md
+script/demo.vue
+script/index.js
+script/index.d.ts
+script/package.json
+script/README.md

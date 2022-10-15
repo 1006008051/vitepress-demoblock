@@ -1,5 +1,4 @@
 import DefaultTheme from 'vitepress/theme'; //引入默认主题
-// @ts-ignore
 import demo from '../../demo.vue'
 
 import ElementPlus from 'element-plus'

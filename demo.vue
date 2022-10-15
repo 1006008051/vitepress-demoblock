@@ -43,7 +43,7 @@
 <script lang="ts">
 import { computed, defineAsyncComponent, ref } from "vue";
 // @ts-ignore
-const modules = import.meta.glob("./**/*.vue");
+const modules = import.meta.glob("../../**/*.vue");
 // @ts-ignore npm publish时
 // const modules = import.meta.glob("../../**/*.vue");
 const timeoutIdMap = new Map();

@@ -1,3 +1,4 @@
+// @ts-ignore
 import demoblock from '../';
 export default {
     srcDir: "./",

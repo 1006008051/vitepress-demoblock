@@ -1,5 +1,4 @@
-// @ts-ignore
-import demoblock from '../';
+import demoblock from '../src/demoblock';
 export default {
     srcDir: "./",
     outDir: './docs',

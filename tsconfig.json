@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "outDir": "script",
+        "sourceMap": false,
+        "isolatedModules": false,
+        "diagnostics": false, // 打印编译信息
+        "tsBuildInfoFile": "./node_modules/buildFile", // 增量编译文件的存储位置
+        "target": "esnext", // 目标语言的版本
+        "module": "esnext", // 生成代码的模板标准
+        "removeComments": true, // 删除注释 
+        "strict": true, // 开启所有严格的类型检查
+        "strictNullChecks": true,
+        "strictFunctionTypes": false,
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "forceConsistentCasingInFileNames": true,
+        "composite": true,
+        "lib": [
+            "ESNext",
+            "DOM"
+        ]
+    }
+}

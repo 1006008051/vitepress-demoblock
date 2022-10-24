@@ -43,19 +43,20 @@ const getRelativePath = (path1 = "", path2 = "") => {
 };
 
 /**
- * @name getDemoLableAttr
+ * @name getDemoLabel
  * @desc 获取demo标签里的属性
  * @param {string} demo demo的标签字符串
  * @param {string} attr 需要获取的attr
  * @return {string} 返回获取到的demo标签属性，如src
  */
-const getDemoLableAttr = (demo = "", attr = "") => {
-    let reg = new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`);
+const getDemoLabel = (demo = "", attr?: any) => {
+    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : new RegExp('(?<=(<demo[^>]*?>)).*?(?=(<\/demo>))');
     let match = demo.match(reg);
-    if (match && match.length >= 1) {
-        return match[1]
+    let res = "";
+    if (match) {
+        !attr ? res = match[0] : match.length >= 1 ? res = match[1] : ""
     }
-    return "";
+    return res;
 };
 
 export default (md: any) => {
@@ -67,24 +68,33 @@ export default (md: any) => {
         const demoReg_g = new RegExp(demoReg, 'g');
         const demoLabels = result.match(demoReg_g);// 获取所有的demo标签
         demoLabels?.forEach(async (demo: any) => {
-            const demoSrc = getDemoLableAttr(demo, 'src'); //demo src
-            const demoLang = getDemoLableAttr(demo, 'lang') || 'vue'; //demo lang
-            const demoDesc = getDemoLableAttr(demo, 'desc'); //demo desc
+            let codeStr = "";//demo中间字符串
+            let htmlStr = "";//demo的html字符串
+            let descStr = "";//demo的desc字符串
+            const slot = getDemoLabel(demo); //标签之间的内容
+            const demoSrc = getDemoLabel(demo, 'src'); //demo src
+            const demoDesc = getDemoLabel(demo, 'desc'); //demo desc
+            const demoLang = getDemoLabel(demo, 'lang') || 'vue'; //demo lang
             const demoPath = resolve(docPath, '../', demoSrc);//demo md的绝对路径
+            let demoRelativePath = null;// 获取demo的相对路径
             const existSrc = demoSrc && fs.existsSync(demoPath); // 判断 src 是否存在且正确
-            if (existSrc) {
-                const demoRelativePath = getRelativePath(demoComponentsPath, demoPath);// 获取demo的相对路径
-                let codeStr = fs.readFileSync(demoPath).toString();//demo中间字符串
-                let htmlStr = codeToHtml(codeStr, { lang: demoLang });//demo的html字符串
-                let descStr = md.renderInline(demoDesc) || "";//demo的desc字符串
-                let demoStr = demo.replace(
-                    '>',
-                    ` codeStr="${encodeURIComponent(
-                        codeStr
-                    )}" htmlStr="${encodeURIComponent(htmlStr)}" description="${encodeURIComponent(descStr)}" codePath="${demoRelativePath}">`
-                );
-                result = result.replace(demo, demoStr);
+            if (slot) {
+                codeStr = slot;
+            } else if (existSrc) {
+                codeStr = fs.readFileSync(demoPath).toString();//demo中间字符串
+                demoRelativePath = getRelativePath(demoComponentsPath, demoPath);// 获取demo的相对路径
+            } else {
+                codeStr = "src文件不存在";
             }
+            htmlStr = codeToHtml(codeStr, { lang: demoLang });//demo的html字符串
+            descStr = md.renderInline(demoDesc) || "";//demo的desc字符串
+            let demoStr = demo.replace(
+                '>',
+                ` codeStr="${encodeURIComponent(
+                    codeStr
+                )}" htmlStr="${encodeURIComponent(htmlStr)}" description="${encodeURIComponent(descStr)}" codePath="${demoRelativePath}">`
+            );
+            result = result.replace(demo, demoStr);
         });
         return result
     }

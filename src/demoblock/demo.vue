@@ -6,8 +6,9 @@
   >
     <!-- 组件展示 -->
     <div class="demo-slot">
-      <component :is="demoSlot" v-if="codePath" />
-      <div v-else>src 路径不存在，请检查配置</div>
+      <slot v-if="hasSlot"></slot>
+      <component :is="demoSlot" v-else-if="codePath" />
+      <div v-html="decodedCodeStr"></div>
     </div>
     <!-- 代码展示 -->
     <div class="demo-show" v-show="isExpanded">
@@ -53,13 +54,17 @@ export default {
     codePath: String,
     language: { default: "vue", type: String },
   },
-  setup(props) {
+  setup(props, content) {
+    const { codePath, codeStr, htmlStr, description } = props;
+    const { slots } = content;
     const hover = ref(false); //鼠标是否悬浮之上
-    const decodedCodeStr = computed(() => decodeURIComponent(props.codeStr ?? ""));
-    const decodedHtmlStr = computed(() => decodeURIComponent(props.htmlStr ?? ""));
-    const decodedDesc = computed(() => decodeURIComponent(props.description ?? ""));
+    const hasSlot = computed(() => (slots?.default ? true : false));
+    const decodedCodeStr = computed(() => decodeURIComponent(codeStr ?? ""));
+    const decodedHtmlStr = computed(() => decodeURIComponent(htmlStr ?? ""));
+    const decodedDesc = computed(() => decodeURIComponent(description ?? ""));
     // 注册演示组件
-    const demoSlot = defineAsyncComponent(modules[props.codePath]);
+    const demoSlot =
+      codePath && modules[codePath] ? defineAsyncComponent(modules[codePath]) : null;
     // 展开or收起代码
     const isExpanded = ref(false);
     const onClickControl = () => {
@@ -85,7 +90,8 @@ export default {
     };
     return {
       hover,
-      codePath: props.codePath,
+      codePath,
+      hasSlot,
       demoSlot,
       isExpanded,
       decodedCodeStr,

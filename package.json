@@ -27,12 +27,12 @@
     "node": ">=14"
   },
   "scripts": {
-    "dev": "rimraf ./script/demo.vue && vitepress dev",
+    "dev": "rimraf -G ./script/demo.vue && vitepress dev",
     "build": "npm run build:es && npm run build:docs",
-    "build:es": "rimraf ./script/src && tsc -b -f",
-    "build:docs": "rimraf ./script/demo.vue &&  vitepress build",
+    "build:es": "rimraf -G ./script/src && tsc -b -f",
+    "build:docs": "rimraf -G ./script/demo.vue &&  vitepress build",
     "serve": "vitepress serve",
-    "release": "node script/release && rimraf ./script/src"
+    "release": "node script/release && rimraf -G ./script/src"
   },
   "keywords": [
     "vitepress-demoblock",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/node": "^18.7.23",
     "element-plus": "^2.2.17",
-    "rimraf": "^3.0.2",
+    "rimraf": "3.0.0",
     "sass": "^1.55.0",
     "typescript": "^4.8.4",
     "vitepress": "^1.0.0-alpha.19",

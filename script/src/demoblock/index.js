@@ -33,7 +33,7 @@ const getRelativePath = (path1 = "", path2 = "") => {
     return relativePath;
 };
 const getDemoLabel = (demo = "", attr) => {
-    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : new RegExp('(?<=(<demo[^>]*?>)).*?(?=(<\/demo>))');
+    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : new RegExp('(?<=(<demo[^>]*?>))((?:.|\n)*)(?=(<\/demo>))');
     let match = demo.match(reg);
     let res = "";
     if (match) {

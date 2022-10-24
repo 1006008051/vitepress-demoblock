@@ -8,7 +8,7 @@
     <div class="demo-slot">
       <slot v-if="hasSlot"></slot>
       <component :is="demoSlot" v-else-if="codePath" />
-      <div v-html="decodedCodeStr"></div>
+      <div v-html="decodedCodeStr" v-else></div>
     </div>
     <!-- 代码展示 -->
     <div class="demo-show" v-show="isExpanded">

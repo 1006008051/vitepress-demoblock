@@ -50,7 +50,7 @@ const getRelativePath = (path1 = "", path2 = "") => {
  * @return {string} 返回获取到的demo标签属性，如src
  */
 const getDemoLabel = (demo = "", attr?: any) => {
-    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : new RegExp('(?<=(<demo[^>]*?>)).*?(?=(<\/demo>))');
+    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : new RegExp('(?<=(<demo[^>]*?>))((?:.|\n)*)(?=(<\/demo>))');
     let match = demo.match(reg);
     let res = "";
     if (match) {
@@ -88,6 +88,8 @@ export default (md: any) => {
             }
             htmlStr = codeToHtml(codeStr, { lang: demoLang });//demo的html字符串
             descStr = md.renderInline(demoDesc) || "";//demo的desc字符串
+
+
             let demoStr = demo.replace(
                 '>',
                 ` codeStr="${encodeURIComponent(

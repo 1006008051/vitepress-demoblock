@@ -46,17 +46,16 @@ const getRelativePath = (path1 = "", path2 = "") => {
  * @name getDemoLabel
  * @desc 获取demo标签里的属性
  * @param {string} demo demo的标签字符串
- * @param {string} attr 需要获取的attr
+ * @param {string} attr 需要获取的attr,不存在时获取标签里的内容
  * @return {string} 返回获取到的demo标签属性，如src
  */
 const getDemoLabel = (demo = "", attr?: any) => {
-    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : new RegExp('(?<=(<demo[^>]*?>))((?:.|\n)*)(?=(<\/demo>))');
+    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : /<demo[\s\S]*?>([\s\S]*?)<\/demo>/;
     let match = demo.match(reg);
-    let res = "";
-    if (match) {
-        !attr ? res = match[0] : match.length >= 1 ? res = match[1] : ""
+    if (match && match.length >= 1) {
+        return match[1] || "";
     }
-    return res;
+    return "";
 };
 
 export default (md: any) => {
@@ -64,7 +63,7 @@ export default (md: any) => {
     md.render = (...args: any[]) => {
         let docPath = args[1].path; // 文档路径
         let result = render.call(md, ...args); // md转之后的text
-        const demoReg = /<demo[\s\S]*?>([\s\S]*?)<\/demo>/; // 匹配demo标签
+        const demoReg = /<demo([\s\S]*?)(\/demo>|\/>)/; // 匹配demo标签(支持单双标签)
         const demoReg_g = new RegExp(demoReg, 'g');
         const demoLabels = result.match(demoReg_g);// 获取所有的demo标签
         demoLabels?.forEach(async (demo: any) => {
@@ -76,7 +75,7 @@ export default (md: any) => {
             const demoDesc = getDemoLabel(demo, 'desc'); //demo desc
             const demoLang = getDemoLabel(demo, 'lang') || 'vue'; //demo lang
             const demoPath = resolve(docPath, '../', demoSrc);//demo md的绝对路径
-            let demoRelativePath = null;// 获取demo的相对路径
+            let demoRelativePath = "";// 获取demo的相对路径
             const existSrc = demoSrc && fs.existsSync(demoPath); // 判断 src 是否存在且正确
             if (slot) {
                 codeStr = slot;
@@ -88,8 +87,6 @@ export default (md: any) => {
             }
             htmlStr = codeToHtml(codeStr, { lang: demoLang });//demo的html字符串
             descStr = md.renderInline(demoDesc) || "";//demo的desc字符串
-
-
             let demoStr = demo.replace(
                 '>',
                 ` codeStr="${encodeURIComponent(

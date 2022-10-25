@@ -10,5 +10,7 @@ Avatar 组件可以用来代表人物或对象， 支持使用图片，图标或
 <demo src="../component/avatar.vue"></demo>
 ```
 ###### 输出
+
 <demo src="../component/avatar.vue"></demo>
+
 

@@ -59,7 +59,7 @@ export default (md) => {
             const demoPath = resolve(docPath, '../', demoSrc);
             let demoRelativePath = "";
             const existSrc = demoSrc && fs.existsSync(demoPath);
-            if (slot) {
+            if (slot?.trim()) {
                 codeStr = slot;
             }
             else if (existSrc) {

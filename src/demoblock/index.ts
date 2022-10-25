@@ -77,7 +77,7 @@ export default (md: any) => {
             const demoPath = resolve(docPath, '../', demoSrc);//demo md的绝对路径
             let demoRelativePath = "";// 获取demo的相对路径
             const existSrc = demoSrc && fs.existsSync(demoPath); // 判断 src 是否存在且正确
-            if (slot) {
+            if (slot?.trim()) {
                 codeStr = slot;
             } else if (existSrc) {
                 codeStr = fs.readFileSync(demoPath).toString();//demo中间字符串

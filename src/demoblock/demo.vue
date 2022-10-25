@@ -132,6 +132,13 @@ export default {
   overflow: auto;
 }
 
+.demo-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  align-items: center;
+}
+
 .demo-show {
   position: relative;
   border-top: solid 1px var(--vp-c-divider-light);

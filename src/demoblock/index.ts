@@ -50,7 +50,7 @@ const getRelativePath = (path1 = "", path2 = "") => {
  * @return {string} 返回获取到的demo标签属性，如src
  */
 const getDemoLabel = (demo = "", attr?: any) => {
-    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : /<demo[\s\S]*?>([\s\S]*?)<\/demo>/;
+    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : /<demo[\s\S]*?>([\s\S]*?)(<\/demo>|\/>)$/;
     let match = demo.match(reg);
     if (match && match.length >= 1) {
         return match[1] || "";
@@ -63,7 +63,7 @@ export default (md: any) => {
     md.render = (...args: any[]) => {
         let docPath = args[1].path; // 文档路径
         let result = render.call(md, ...args); // md转之后的text
-        const demoReg = /<demo([\s\S]*?)(\/demo>|\/>)/; // 匹配demo标签(支持单双标签)
+        const demoReg = /<demo([\s\S]*?)(<\/demo>|\/>)/; // 匹配demo标签(支持单双标签)
         const demoReg_g = new RegExp(demoReg, 'g');
         const demoLabels = result.match(demoReg_g);// 获取所有的demo标签
         demoLabels?.forEach(async (demo: any) => {

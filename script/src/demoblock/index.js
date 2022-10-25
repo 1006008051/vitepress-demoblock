@@ -33,7 +33,7 @@ const getRelativePath = (path1 = "", path2 = "") => {
     return relativePath;
 };
 const getDemoLabel = (demo = "", attr) => {
-    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : /<demo[\s\S]*?>([\s\S]*?)<\/demo>/;
+    let reg = attr ? new RegExp(`<demo[^>]+${attr}=['"]([^'"]+)['"]`) : /<demo[\s\S]*?>([\s\S]*?)(<\/demo>|\/>)$/;
     let match = demo.match(reg);
     if (match && match.length >= 1) {
         return match[1] || "";
@@ -45,7 +45,7 @@ export default (md) => {
     md.render = (...args) => {
         let docPath = args[1].path;
         let result = render.call(md, ...args);
-        const demoReg = /<demo([\s\S]*?)(\/demo>|\/>)/;
+        const demoReg = /<demo([\s\S]*?)(<\/demo>|\/>)/;
         const demoReg_g = new RegExp(demoReg, 'g');
         const demoLabels = result.match(demoReg_g);
         demoLabels?.forEach(async (demo) => {

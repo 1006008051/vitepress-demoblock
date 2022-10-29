@@ -24,8 +24,8 @@ const demoComponentsPath = resolve(__dirname, 'demo.vue');
  * @return {string} 转后的相对路径，
  */
 const getRelativePath = (path1 = "", path2 = "") => {
-    const path1Arr = path1.split('\\');
-    const path2Arr = path2.split('\\');
+    const path1Arr = path1.split(/\\|\//g);
+    const path2Arr = path2.split(/\\|\//g);
     const path1ArrLen = path1Arr.length;
     let relativePath = '';
     for (let i = 0; i < path1ArrLen; i++) {
